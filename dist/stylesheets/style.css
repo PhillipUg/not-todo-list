@@ -32,3 +32,17 @@
 .border-bottom {
 	border-bottom: 1px solid gray !important;
 }
+
+.list-group {
+	overflow-x: scroll;
+	width: 80%;
+  scrollbar-width: none
+}
+
+.list-group-item {
+	min-width: 150px;
+}
+
+.list-group::-webkit-scrollbar {
+  display: none;
+}
