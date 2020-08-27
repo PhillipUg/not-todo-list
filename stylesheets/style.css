@@ -18,6 +18,7 @@
 }
 
 .wrap {
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
@@ -41,8 +42,24 @@
 
 .list-group-item {
 	min-width: 150px;
+	position: relative;
+	display: inline-block;
 }
 
 .list-group::-webkit-scrollbar {
   display: none;
+}
+
+.fa-times-circle {
+	position: absolute;
+	top: 34%;
+	right: 5%;
+}
+
+.fa-chevron-circle-left {
+	color: grey;
+}
+
+.fa-plus-square:hover {
+	color: grey;
 }
