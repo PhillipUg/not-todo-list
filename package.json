@@ -1,0 +1,27 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhillipUg/todo-list.git"
+  },
+  "keywords": [],
+  "author": "phillip musiime <phillipmusiime@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PhillipUg/todo-list/issues"
+  },
+  "homepage": "https://github.com/PhillipUg/todo-list#readme",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
