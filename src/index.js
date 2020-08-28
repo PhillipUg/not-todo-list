@@ -156,8 +156,14 @@ clickableLi.forEach((item) => {
 	item.addEventListener('click', () => {
 		console.log(item.id);
 		getItems(item.id);
+		showForm();
 	});
 });
+
+function showForm() {
+	const itemForm = document.getElementById('form');
+	itemForm.classList.add('d-flex');
+}
 
 function getItems(id) {
 	let items = getLocalStorage(listItemsStorage);
