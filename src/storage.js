@@ -1,28 +1,33 @@
+import { compareAsc, format } from 'date-fns'
+
+
+
+
 let listStorage = 'list';
 const defaultProject = { title: 'Smoking', id: 0 };
 const defaultNotTodo1 = {
 	parentId: 0,
 	id: 0,
 	title: 'Do not buy cigarattes',
-	date: '28.8.2020',
+	date: format(new Date(2020, 1, 23), 'yyyy-MM-dd'),
 	description: 'avoid buyin new pack of cigarattes',
 	priority: 'high',
 	status: false
 };
 const defaultNotTodo2 = {
-	parentId: 1,
+	parentId: 0,
 	id: 1,
 	title: 'Try to smoke not more than twice in a day',
-	date: '29.8.2020',
+	date: format(new Date(2020, 11, 14), 'yyyy-MM-dd'),
 	description: 'Try to smoke not more than twice in a day',
 	priority: 'medium',
-	status: true
+	status: false
 };
 const defaultNotTodo3 = {
 	parentId: 0,
 	id: 2,
 	title: 'Avoid smokers',
-	date: '30.8.2020',
+	date: format(new Date(2020, 5, 2), 'yyyy-MM-dd'),
 	description: 'Avoid spending time with people who smoke',
 	priority: 'low',
 	status: false
