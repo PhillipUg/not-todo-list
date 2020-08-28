@@ -63,3 +63,12 @@
 .fa-plus-square:hover {
 	color: grey;
 }
+
+.color-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	justify-content: center;
+	top: 0;
+	left: 0;
+}
