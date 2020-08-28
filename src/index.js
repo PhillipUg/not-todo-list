@@ -37,7 +37,7 @@ import {
  */
 setListItemsStorage();
 setListStorage();
-
+let currentProject = -1;
 function Project(title) {
 	this.title = title;
 	let idx;
@@ -156,13 +156,14 @@ clickableLi.forEach((item) => {
 	item.addEventListener('click', () => {
 		console.log(item.id);
 		getItems(item.id);
-		showForm();
+		showForm(item);
 	});
 });
 
-function showForm() {
+function showForm(item) {
 	const itemForm = document.getElementById('form');
 	itemForm.classList.add('d-flex');
+	currentProject = item.id;
 }
 
 function getItems(id) {
@@ -219,3 +220,13 @@ function renderItems(result) {
 		items.appendChild(itemsDiv);
 	});
 }
+
+const projecItmBtn = document.getElementById('projectItem');
+projecItmBtn.addEventListener('click', () => {
+	const itemFrom = document.getElementById('itemForm');
+	let children = itemFrom.children;
+	let inputs = Array.from(children);
+	const newItem = new Item(currentProject, inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value);
+	setLocalStorage(getLocalStorage(listItemsStorage), listItemsStorage, newItem);
+	getItems(currentProject);
+});
