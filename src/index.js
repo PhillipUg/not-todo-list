@@ -5,7 +5,8 @@ import {
 	setLocalStorage,
 	listItemsStorage,
 	updateLocalStorage,
-	listStorage
+	listStorage,
+	listLength
 } from './storage';
 
 // let arr = [
@@ -39,6 +40,21 @@ setListStorage();
 
 function Project(title) {
 	this.title = title;
+	let idx;
+	if (listLength() === 0) {
+		idx = 0;
+	} else {
+		idx = JSON.parse(localStorage.getItem(listStorage))[listLength() - 1].id + 1;
+	}
+	this.id = idx;
+}
+
+function Item(parentId, title, date, description, priority) {
+	this.parentId = parentId;
+	this.title = title;
+	this.date = date;
+	this.description = description;
+	this.priority = priority;
 }
 
 const projectInput = document.getElementById('project');
