@@ -79,6 +79,7 @@ function render() {
 		const li = document.createElement('li');
 		li.classList.add('list-group-item', 'm-1', 'pr-4', 'border', 'rounded', 'wrap');
 		li.innerText = array[idx].title;
+		li.id = array[idx].id;
 
 		const icon = document.createElement('i');
 		icon.classList.add('fa', 'fa-times-circle', 'ml-2', 'text-danger');
@@ -147,5 +148,68 @@ function listenClose(item, index) {
 
 		updateLocalStorage(storedItems, listStorage);
 		location.reload();
+	});
+}
+
+const clickableLi = document.querySelectorAll('.list-group-item');
+clickableLi.forEach((item) => {
+	item.addEventListener('click', () => {
+		console.log(item.id);
+		getItems(item.id);
+	});
+});
+
+function getItems(id) {
+	let items = getLocalStorage(listItemsStorage);
+	const result = items.filter((item) => item.parentId == id);
+	renderItems(result);
+}
+
+function renderItems(result) {
+	let items = document.getElementById('items');
+	items.innerHTML = '';
+
+	result.forEach((item, idx, array) => {
+		const itemsDiv = document.createElement('div');
+		itemsDiv.classList.add('border', 'w-100', 'p-1', 'my-1', 'rounded', 'bg-light', 'shadow');
+
+		const itemHeader = document.createElement('div');
+		itemHeader.classList.add('w-100', 'd-flex', 'justify-content-between', 'p-2', 'my-1');
+		itemsDiv.appendChild(itemHeader);
+
+		const itemTitle = document.createElement('div');
+		itemTitle.innerText = item.title;
+		itemHeader.appendChild(itemTitle);
+
+		const itemIcons = document.createElement('div');
+		itemIcons.classList.add('d-flex');
+		itemHeader.appendChild(itemIcons);
+
+		const itemEdit = document.createElement('i');
+		itemEdit.classList.add('fa', 'fa-pencil', 'm-1');
+
+		const itemStatus = document.createElement('i');
+		itemStatus.classList.add('fa', 'fa-check-circle', 'm-1');
+
+		itemIcons.appendChild(itemEdit);
+		itemIcons.appendChild(itemStatus);
+
+		const itemDetail = document.createElement('div');
+
+		const itemDate = document.createElement('div');
+		itemDate.innerText = 'Date: ' + item.date;
+
+		const itemDescription = document.createElement('div');
+		itemDescription.innerText = 'Description: ' + item.description;
+
+		const itemPriority = document.createElement('div');
+		itemPriority.innerText = 'Priority: ' + item.priority;
+
+		itemDetail.appendChild(itemDescription);
+		itemDetail.appendChild(itemDate);
+		itemDetail.appendChild(itemPriority);
+		itemsDiv.appendChild(itemDetail);
+
+		items.appendChild(itemsDiv);
 	});
 }

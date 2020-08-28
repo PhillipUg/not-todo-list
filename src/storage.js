@@ -9,7 +9,7 @@ const defaultNotTodo1 = {
 	status: false
 };
 const defaultNotTodo2 = {
-	parentId: 0,
+	parentId: 1,
 	title: 'Try to smoke not more than twice in a day',
 	date: '29.8.2020',
 	description: 'Try to smoke not more than twice in a day',
