@@ -178,7 +178,7 @@ function renderItems(result) {
 
 	result.forEach((item, idx, array) => {
 		const itemsDiv = document.createElement('div');
-		itemsDiv.classList.add('border', 'w-100', 'p-1', 'my-1', 'rounded', 'bg-light', 'shadow');
+		itemsDiv.classList.add('border', 'w-100', 'p-1', 'my-1', 'rounded', 'bg-light', 'shadow', 'toggleItems');
 
 		const itemHeader = document.createElement('div');
 		itemHeader.classList.add('w-100', 'd-flex', 'justify-content-between', 'p-2', 'my-1');
@@ -202,6 +202,7 @@ function renderItems(result) {
 		itemIcons.appendChild(itemStatus);
 
 		const itemDetail = document.createElement('div');
+		itemDetail.classList.add('d-none');
 
 		const itemDate = document.createElement('div');
 		itemDate.innerText = 'Date: ' + item.date;
@@ -218,6 +219,7 @@ function renderItems(result) {
 		itemsDiv.appendChild(itemDetail);
 
 		items.appendChild(itemsDiv);
+		itemToggleListener();
 	});
 }
 
@@ -230,3 +232,13 @@ projecItmBtn.addEventListener('click', () => {
 	setLocalStorage(getLocalStorage(listItemsStorage), listItemsStorage, newItem);
 	getItems(currentProject);
 });
+
+function itemToggleListener() {
+	const toggleItems = document.querySelectorAll('.toggleItems');
+
+	toggleItems.forEach((item, idx, array) => {
+		item.addEventListener('click', () => {
+			console.log(item.children[2]);
+		});
+	});
+}
