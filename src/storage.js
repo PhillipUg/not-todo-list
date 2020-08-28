@@ -2,6 +2,7 @@ let listStorage = 'list';
 const defaultProject = { title: 'Smoking', id: 0 };
 const defaultNotTodo1 = {
 	parentId: 0,
+	id: 0,
 	title: 'Do not buy cigarattes',
 	date: '28.8.2020',
 	description: 'avoid buyin new pack of cigarattes',
@@ -10,6 +11,7 @@ const defaultNotTodo1 = {
 };
 const defaultNotTodo2 = {
 	parentId: 1,
+	id: 1,
 	title: 'Try to smoke not more than twice in a day',
 	date: '29.8.2020',
 	description: 'Try to smoke not more than twice in a day',
@@ -18,6 +20,7 @@ const defaultNotTodo2 = {
 };
 const defaultNotTodo3 = {
 	parentId: 0,
+	id: 2,
 	title: 'Avoid smokers',
 	date: '30.8.2020',
 	description: 'Avoid spending time with people who smoke',
@@ -62,10 +65,10 @@ function updateLocalStorage(array, name) {
 	localStorage.setItem(name, JSON.stringify(array));
 }
 
-const listLength = () => {
+const listLength = (name) => {
 	let listLen = 0;
-	if (JSON.parse(localStorage.getItem(listStorage))) {
-		listLen = JSON.parse(localStorage.getItem(listStorage)).length;
+	if (JSON.parse(localStorage.getItem(name))) {
+		listLen = JSON.parse(localStorage.getItem(name)).length;
 	}
 	return listLen;
 };
