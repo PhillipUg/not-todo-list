@@ -9,35 +9,12 @@ import {
   listLength,
 } from './storage';
 
-// let arr = [
-//   {}
-// ]
 
-/*
- 1. create project object
- - add event listener
- - get input value
- - use input value to create object in local storage
- - use local storage to update project field
-
- -user shouldnt be able to create a list item without a project title
-
- - add functionality for the close btn on each proj title
- - add horizontal scroll
-
-
- 2. create todo item
- - add event listener
- - add some validation for the fields
- - get input value and use it to store list items in local storage
- - use local storage to update dom list field
-
- - add event listener to update list item status
- - add eventlistener for implementing editing functionality
- */
 setListItemsStorage();
 setListStorage();
+
 let currentProject = -1;
+
 function Project(title) {
   this.title = title;
   let idx;
@@ -67,6 +44,7 @@ function Item(parentId, title, description, date, priority) {
 
 const projectInput = document.getElementById('project');
 const createProject = document.getElementById('create-project');
+const ul = document.querySelector('.list-group');
 
 createProject.addEventListener('click', () => {
   if (projectInput.value) {
@@ -77,7 +55,6 @@ createProject.addEventListener('click', () => {
   }
 });
 
-const ul = document.querySelector('.list-group');
 
 function render() {
   ul.innerHTML = '';
@@ -189,7 +166,7 @@ function renderItems(result) {
   const items = document.getElementById('items');
   items.innerHTML = '';
 
-  result.forEach((item, idx, array) => {
+  result.forEach((item) => {
     const itemsDiv = document.createElement('div');
     itemsDiv.classList.add('border', 'w-100', 'p-1', 'my-1', 'rounded', 'bg-light', 'shadow', 'toggleItems');
 
@@ -277,20 +254,18 @@ function itemStatusListener() {
   const itemStatus = document.querySelectorAll('.fa-check-circle');
   itemStatus.forEach((item) => {
     item.addEventListener('click', () => {
-      updateItemStatus(item.parentNode.dataset.id, item);
+      updateItemStatus(item);
     });
   });
 }
 
-function updateItemStatus(itemId, itm) {
+function updateItemStatus(itm) {
   const listItems = getLocalStorage(listItemsStorage);
 
   listItems.forEach((item) => {
-    if (item.id == itemId) {
-      item.status == false ? (item.status = true, itm.classList.add('text-success'), itm.classList.remove('text-dark')) : (item.status = false, itm.classList.add('text-dark'), itm.classList.remove('text-success'));
-    }
+    item.status == false ? (item.status = true, itm.classList.add('text-success'), itm.classList.remove('text-dark')) : (item.status = false, itm.classList.add('text-dark'), itm.classList.remove('text-success'));
+    updateLocalStorage(listItems, listItemsStorage);
   });
-  updateLocalStorage(listItems, listItemsStorage);
 }
 
 function editItems() {
@@ -329,7 +304,8 @@ function editItems() {
         itemForm.children[0].style.cssText = 'border-bottom-color:black !important';
         itemForm.children[1].style.cssText = 'border-bottom-color:black !important';
         itemForm.children[2].style.cssText = 'border-bottom-color:black !important';
-        location.reload();
+        // location.reload();
+        // render();
       });
     });
   });
