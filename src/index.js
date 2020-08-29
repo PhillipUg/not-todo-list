@@ -128,8 +128,23 @@ function listenClose(item, index) {
 		const storedItems = [ ...getLocalStorage(listStorage) ];
 		storedItems.splice(index, 1);
 
+		const storedListItems = [ ...getLocalStorage(listItemsStorage) ];
+		const storedListItemUpdate = storedListItems.filter((itm) => itm.parentId != item.parentNode.id);
 		updateLocalStorage(storedItems, listStorage);
+		updateLocalStorage(storedListItemUpdate, listItemsStorage);
 		location.reload();
+	});
+}
+
+function removeItem() {
+	const deleteItem = document.querySelectorAll('.fa-trash');
+	deleteItem.forEach((item, index) => {
+		item.addEventListener('click', () => {
+			const storedListItemUpdate = [ ...getLocalStorage(listItemsStorage) ];
+			storedListItemUpdate.splice(index, 1);
+			updateLocalStorage(storedListItemUpdate, listItemsStorage);
+			getItems(currentProject);
+		});
 	});
 }
 
@@ -163,7 +178,6 @@ function getItems(id) {
 function renderItems(result) {
 	const items = document.getElementById('items');
 	items.innerHTML = '';
-
 	result.forEach((item) => {
 		let tickColor, itemBorder;
 		item.status ? (tickColor = 'text-success') : (tickColor = 'text-dark');
@@ -193,8 +207,12 @@ function renderItems(result) {
 		const itemStatus = document.createElement('i');
 		itemStatus.classList.add('fa', 'fa-check-circle', 'm-1', tickColor);
 
+		const itemDelete = document.createElement('i');
+		itemDelete.classList.add('fa', 'fa-trash', 'm-1', 'text-danger');
+
 		itemIcons.appendChild(itemEdit);
 		itemIcons.appendChild(itemStatus);
+		itemIcons.appendChild(itemDelete);
 
 		const itemDetail = document.createElement('div');
 		itemDetail.classList.add('d-none', 'flex-column', 'align-items-start', 'border');
@@ -218,6 +236,7 @@ function renderItems(result) {
 	itemToggleListener();
 	itemStatusListener();
 	editItems();
+	removeItem();
 }
 
 const projecItmBtn = document.getElementById('projectItem');
