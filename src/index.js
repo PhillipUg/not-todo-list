@@ -6,7 +6,7 @@ import {
   listItemsStorage,
   updateLocalStorage,
   listStorage,
-  listLength
+  listLength,
 } from './storage';
 
 // let arr = [
@@ -81,7 +81,7 @@ const ul = document.querySelector('.list-group');
 
 function render() {
   ul.innerHTML = '';
-  let local = getLocalStorage(listStorage);
+  const local = getLocalStorage(listStorage);
 
   local.forEach((item, idx, array) => {
     const li = document.createElement('li');
@@ -107,7 +107,7 @@ var rightBtn = document.getElementById('slide-right');
 var leftBtn = document.getElementById('slide-left');
 
 rightBtn.onclick = function () {
-  let scrolled = ul.scrollWidth - ul.scrollLeft === ul.clientWidth;
+  const scrolled = ul.scrollWidth - ul.scrollLeft === ul.clientWidth;
   sideScroll(ul, 'right', 25, 100, 10);
   if (scrolled) {
     rightBtn.style.color = 'grey';
@@ -129,7 +129,7 @@ leftBtn.onclick = function () {
 
 function sideScroll(element, direction, speed, distance, step) {
   let scrollAmount = 0;
-  var slideTimer = setInterval(function () {
+  var slideTimer = setInterval(() => {
     if (direction == 'left') {
       element.scrollLeft -= step;
     } else {
@@ -142,7 +142,7 @@ function sideScroll(element, direction, speed, distance, step) {
   }, speed);
 }
 window.onload = render();
-let closeBtns = document.querySelectorAll('.fa-times-circle');
+const closeBtns = document.querySelectorAll('.fa-times-circle');
 
 closeBtns.forEach((item, index) => {
   listenClose(item, index);
@@ -150,7 +150,7 @@ closeBtns.forEach((item, index) => {
 
 function listenClose(item, index) {
   item.addEventListener('click', (e) => {
-    let storedItems = [...getLocalStorage(listStorage)];
+    const storedItems = [...getLocalStorage(listStorage)];
     storedItems.splice(index, 1);
 
     updateLocalStorage(storedItems, listStorage);
@@ -180,13 +180,13 @@ function showForm(item) {
 }
 
 function getItems(id) {
-  let items = getLocalStorage(listItemsStorage);
+  const items = getLocalStorage(listItemsStorage);
   const result = items.filter((item) => item.parentId == id);
   renderItems(result);
 }
 
 function renderItems(result) {
-  let items = document.getElementById('items');
+  const items = document.getElementById('items');
   items.innerHTML = '';
 
   result.forEach((item, idx, array) => {
@@ -224,13 +224,13 @@ function renderItems(result) {
     itemDetail.classList.add('d-none', 'flex-column', 'align-items-start', 'border');
 
     const itemDate = document.createElement('div');
-    itemDate.innerText = 'Date: ' + item.date;
+    itemDate.innerText = `Date: ${item.date}`;
 
     const itemDescription = document.createElement('div');
-    itemDescription.innerText = 'Description: ' + item.description;
+    itemDescription.innerText = `Description: ${item.description}`;
 
     const itemPriority = document.createElement('div');
-    itemPriority.innerText = 'Priority: ' + item.priority;
+    itemPriority.innerText = `Priority: ${item.priority}`;
 
     itemDetail.appendChild(itemDescription);
     itemDetail.appendChild(itemDate);
@@ -247,8 +247,8 @@ function renderItems(result) {
 const projecItmBtn = document.getElementById('projectItem');
 projecItmBtn.addEventListener('click', () => {
   const itemFrom = document.getElementById('itemForm');
-  let children = itemFrom.children;
-  let inputs = Array.from(children);
+  const { children } = itemFrom;
+  const inputs = Array.from(children);
   const newItem = new Item(currentProject, inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value);
   setLocalStorage(getLocalStorage(listItemsStorage), listItemsStorage, newItem);
   getItems(currentProject);
@@ -283,7 +283,7 @@ function itemStatusListener() {
 }
 
 function updateItemStatus(itemId, itm) {
-  let listItems = getLocalStorage(listItemsStorage);
+  const listItems = getLocalStorage(listItemsStorage);
 
   listItems.forEach((item) => {
     if (item.id == itemId) {
@@ -302,10 +302,10 @@ function editItems() {
       itemForm.children[1].style.cssText = 'border-bottom-color:red !important';
       itemForm.children[2].style.cssText = 'border-bottom-color:red !important';
 
-      let items = getLocalStorage(listItemsStorage);
+      const items = getLocalStorage(listItemsStorage);
       const item = items[btn.parentNode.dataset.id];
       const itemFrom = document.getElementById('itemForm');
-      let fields = Array.from(itemFrom.children);
+      const fields = Array.from(itemFrom.children);
       fields[0].value = item.title;
       fields[1].value = item.description;
       fields[2].value = item.date;
@@ -322,19 +322,15 @@ function editItems() {
         updateLocalStorage(items, listItemsStorage);
         document.getElementById('projectItem').classList.remove('d-none');
         updateBtn.classList.add('d-none');
-        fields[0].value = "";
-        fields[1].value = "";
-        fields[2].value = "";
-        fields[3].value = "";
+        fields[0].value = '';
+        fields[1].value = '';
+        fields[2].value = '';
+        fields[3].value = '';
         itemForm.children[0].style.cssText = 'border-bottom-color:black !important';
         itemForm.children[1].style.cssText = 'border-bottom-color:black !important';
         itemForm.children[2].style.cssText = 'border-bottom-color:black !important';
         location.reload();
-      })
-    })
-  })
+      });
+    });
+  });
 }
-
-// function deleteObject(){
-
-// }

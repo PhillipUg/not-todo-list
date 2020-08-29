@@ -1,62 +1,69 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-	margin: 0;
-	padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-	background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.7), rgba(251, 251, 253, 0.9)),
-		url('../images/bg.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+  background-image:
+    linear-gradient(to bottom, rgba(245, 246, 252, 0.7), rgba(251, 251, 253, 0.9)),
+    url('../images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  overflow: hidden;
 }
+
 .title {
-	font-family: 'Permanent Marker', cursive;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .outline {
-	outline: none;
+  outline: none;
 }
 
 .arrow {
-	font-size: 1.5rem !important;
+  font-size: 1.5rem !important;
 }
 
 .wrap {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .select {
-	width: 90px;
+  width: 90px;
 }
 
 .border {
-	border: 1px solid gray !important;
+  border: 1px solid gray !important;
 }
+
 .border-bottom {
-	border-bottom: 1px solid gray !important;
+  border-bottom: 1px solid gray !important;
 }
 
 .list-group {
-	overflow-x: scroll;
-	width: 80%;
-  scrollbar-width: none
+  overflow-x: scroll;
+  width: 80%;
+  scrollbar-width: none;
 }
 
 .list-group-item {
-	min-width: 150px;
-	position: relative;
-	display: inline-block;
-	cursor: pointer;
+  min-width: 150px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
+
 .list-group-item:hover {
-	background-color: #ccc;
+  background-color: #ccc;
 }
 
 .list-group::-webkit-scrollbar {
@@ -64,55 +71,51 @@ html, body {
 }
 
 .fa-times-circle {
-	position: absolute;
-	top: 34%;
-	right: 5%;
+  position: absolute;
+  top: 34%;
+  right: 5%;
 }
 
 .item-icons {
-	font-size: 22px;
+  font-size: 22px;
 }
 
 .fa-chevron-circle-left {
-	color: grey;
+  color: grey;
 }
 
-.fa-plus-square:hover, .fa-pencil:hover {
-	color: grey;
+.fa-plus-square:hover,
+.fa-pencil:hover {
+  color: grey;
 }
 
 .color-dot {
-	width: 5px;
-	height: 5px;
-	border-radius: 50%;
-	justify-content: center;
-	top: 0;
-	left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  justify-content: center;
+  top: 0;
+  left: 0;
 }
 
 .togglerTitle {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .togglerTitle:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 #items {
-	height: 80%;
-	overflow-y: scroll;
-	padding: 20px 20px;
+  height: 80%;
+  overflow-y: auto;
+  padding: 20px 20px;
 }
-
 
 nav {
-	height: 49%;
-}
-main {
-	height: 49%;
+  height: 49%;
 }
 
-.container {
-	height: 100vh;
-	overflow: hidden;
+main {
+  height: 49%;
 }
