@@ -64,7 +64,6 @@ This project's purpose is to practice Javascript. Its built with ES6 while keepi
 ![Product Name Screen Shot][product-screenshot]
 <br>
 <br>
-![Product Name Screen Shot][product-screenshot2]
 
 <!-- ABOUT THE PROJECT -->
 <!-- ## Installation
@@ -125,8 +124,7 @@ To try it live [click here](https://phillipug.github.io/not-todo-list/)
 [stars-url]: https://github.com/PhillipUg/not-todo-list/stargazers
 [issues-shield]: https://img.shields.io/github/issues/PhillipUg/not-todo-list.svg?style=flat-square
 [issues-url]: https://github.com/PhillipUg/not-todo-list/issues
-[product-screenshot]: dist/images/page1.png
-[product-screenshot2]: dist/images/page2.png
+[product-screenshot]: dist/images/todo.png
 
 
 ## 📝 License

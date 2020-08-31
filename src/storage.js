@@ -32,7 +32,7 @@ const defaultNotTodo3 = {
 	priority: 'low',
 	status: false
 };
-
+/* eslint-disable */
 const setListStorage = () => {
 	let listLen = 0;
 	if (JSON.parse(localStorage.getItem(listStorage))) {
@@ -58,7 +58,7 @@ const setListItemsStorage = () => {
 		setLocalStorage(getLocalStorage(listItemsStorage), listItemsStorage, defaultNotTodo3);
 	}
 };
-
+/* eslint-enable */
 function getLocalStorage(name) {
 	const local = JSON.parse(localStorage.getItem(name));
 	return local;
