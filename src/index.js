@@ -9,6 +9,9 @@ import {
 	listLength
 } from './storage';
 
+import { render } from './domContent';
+import closeBtn from './closeBtns';
+
 setListItemsStorage();
 setListStorage();
 
@@ -43,7 +46,6 @@ function Item(parentId, title, description, date, priority) {
 
 const projectInput = document.getElementById('project');
 const createProject = document.getElementById('create-project');
-const ul = document.querySelector('.list-group');
 
 createProject.addEventListener('click', () => {
 	if (projectInput.value) {
@@ -54,87 +56,9 @@ createProject.addEventListener('click', () => {
 	}
 });
 
-function render() {
-	ul.innerHTML = '';
-	const local = getLocalStorage(listStorage);
-
-	local.forEach((item, idx, array) => {
-		const li = document.createElement('li');
-		li.classList.add('list-group-item', 'm-1', 'pr-4', 'border', 'rounded', 'wrap');
-		li.innerText = array[idx].title;
-		li.id = array[idx].id;
-
-		const icon = document.createElement('i');
-		icon.classList.add('fa', 'fa-times-circle', 'ml-2', 'text-danger');
-
-		li.appendChild(icon);
-		ul.appendChild(li);
-		if (ul.scrollWidth === ul.clientWidth) {
-			rightBtn.style.color = 'grey';
-			leftBtn.style.color = 'grey';
-		} else {
-			rightBtn.style.color = 'black';
-		}
-	});
-}
-
-var rightBtn = document.getElementById('slide-right');
-var leftBtn = document.getElementById('slide-left');
-
-rightBtn.onclick = function() {
-	const scrolled = ul.scrollWidth - ul.scrollLeft === ul.clientWidth;
-	sideScroll(ul, 'right', 25, 100, 10);
-	if (scrolled) {
-		rightBtn.style.color = 'grey';
-	} else {
-		rightBtn.style.color = 'black';
-		leftBtn.style.color = 'black';
-	}
-};
-
-leftBtn.onclick = function() {
-	sideScroll(ul, 'left', 25, 100, 10);
-	if (ul.scrollLeft == 0) {
-		leftBtn.style.color = 'grey';
-	} else {
-		leftBtn.style.color = 'black';
-		rightBtn.style.color = 'black';
-	}
-};
-
-function sideScroll(element, direction, speed, distance, step) {
-	let scrollAmount = 0;
-	var slideTimer = setInterval(() => {
-		if (direction == 'left') {
-			element.scrollLeft -= step;
-		} else {
-			element.scrollLeft += step;
-		}
-		scrollAmount += step;
-		if (scrollAmount >= distance) {
-			window.clearInterval(slideTimer);
-		}
-	}, speed);
-}
 window.onload = render();
-const closeBtns = document.querySelectorAll('.fa-times-circle');
 
-closeBtns.forEach((item, index) => {
-	listenClose(item, index);
-});
-
-function listenClose(item, index) {
-	item.addEventListener('click', (e) => {
-		const storedItems = [ ...getLocalStorage(listStorage) ];
-		storedItems.splice(index, 1);
-
-		const storedListItems = [ ...getLocalStorage(listItemsStorage) ];
-		const storedListItemUpdate = storedListItems.filter((itm) => itm.parentId != item.parentNode.id);
-		updateLocalStorage(storedItems, listStorage);
-		updateLocalStorage(storedListItemUpdate, listItemsStorage);
-		location.reload();
-	});
-}
+closeBtn();
 
 function removeItem() {
 	const deleteItem = document.querySelectorAll('.fa-trash');
