@@ -57,7 +57,8 @@ function removeItem() {
 	deleteItem.forEach((item, index) => {
 		item.addEventListener('click', () => {
 			const storedListItemUpdate = [ ...getLocalStorage(listItemsStorage) ];
-			storedListItemUpdate.splice(index, 1);
+			storedListItemUpdate.splice(item.parentNode.dataset.id, 1);
+
 			updateLocalStorage(storedListItemUpdate, listItemsStorage);
 			getItems(currentProject);
 		});
