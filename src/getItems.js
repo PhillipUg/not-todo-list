@@ -1,6 +1,4 @@
 import {
-	setListItemsStorage,
-	setListStorage,
 	getLocalStorage,
 	setLocalStorage,
 	listItemsStorage,
@@ -47,14 +45,20 @@ function createProjects() {
 			const newProject = new Project(projectInput.value);
 			setLocalStorage(getLocalStorage(listStorage), listStorage, newProject);
 			projectInput.value = '';
-			location.reload();
+			window.location.reload();
 		}
 	});
 }
 
+function getItems(id) {
+	const items = getLocalStorage(listItemsStorage);
+	const result = items.filter((item) => item.parentId == id); /* eslint-disable-line */
+	renderItems(result);
+}
+
 function removeItem() {
 	const deleteItem = document.querySelectorAll('.fa-trash');
-	deleteItem.forEach((item, index) => {
+	deleteItem.forEach((item) => {
 		item.addEventListener('click', () => {
 			const storedListItemUpdate = [ ...getLocalStorage(listItemsStorage) ];
 			storedListItemUpdate.splice(item.parentNode.dataset.id, 1);
@@ -68,7 +72,7 @@ function removeItem() {
 function clickableLis() {
 	const clickableLi = document.querySelectorAll('.list-group-item');
 	clickableLi.forEach((item) => {
-		item.addEventListener('click', (e) => {
+		item.addEventListener('click', () => {
 			getItems(item.id);
 			showForm(item);
 			Array.from(clickableLi).filter((li) => {
@@ -77,6 +81,7 @@ function clickableLis() {
 				} else {
 					li.style.backgroundColor = '#ccc';
 				}
+				return;
 			});
 		});
 	});
@@ -88,17 +93,12 @@ function showForm(item) {
 	currentProject = item.id;
 }
 
-function getItems(id) {
-	const items = getLocalStorage(listItemsStorage);
-	const result = items.filter((item) => item.parentId == id);
-	renderItems(result);
-}
-
 function renderItems(result) {
 	const items = document.getElementById('items');
 	items.innerHTML = '';
 	result.forEach((item) => {
-		let tickColor, itemBorder;
+		let tickColor;
+		let itemBorder;
 		item.status ? (tickColor = 'text-success') : (tickColor = 'text-dark');
 		item.priority == 'high'
 			? (itemBorder = 'border-danger')
@@ -199,7 +199,7 @@ function itemStatusListener() {
 }
 
 function updateItemStatus(itemId, itm) {
-	let listItems = getLocalStorage(listItemsStorage);
+	const listItems = getLocalStorage(listItemsStorage);
 
 	listItems.forEach((item) => {
 		if (item.id == itemId) {
@@ -238,7 +238,6 @@ function editItems() {
 				item.description = fields[1].value;
 				item.date = fields[2].value;
 				item.priority = fields[3].value;
-				console.log(fields[0].value);
 				updateLocalStorage(items, listItemsStorage);
 				document.getElementById('projectItem').classList.remove('d-none');
 				updateBtn.classList.add('d-none');

@@ -1,24 +1,30 @@
-import { getLocalStorage, listItemsStorage, updateLocalStorage, listStorage } from './storage';
+import {
+  getLocalStorage, listItemsStorage, updateLocalStorage, listStorage,
+} from './storage';
 
 function closeBtn() {
-	const closeBtns = document.querySelectorAll('.fa-times-circle');
+  const closeBtns = document.querySelectorAll('.fa-times-circle');
 
-	closeBtns.forEach((item, index) => {
-		listenClose(item, index);
-	});
+  function listenClose(item, index) {
+    item.addEventListener('click', () => {
+      const storedItems = [...getLocalStorage(listStorage)];
+      storedItems.splice(index, 1);
 
-	function listenClose(item, index) {
-		item.addEventListener('click', (e) => {
-			const storedItems = [ ...getLocalStorage(listStorage) ];
-			storedItems.splice(index, 1);
+      const storedListItems = [...getLocalStorage(listItemsStorage)];
 
-			const storedListItems = [ ...getLocalStorage(listItemsStorage) ];
-			const storedListItemUpdate = storedListItems.filter((itm) => itm.parentId != item.parentNode.id);
-			updateLocalStorage(storedItems, listStorage);
-			updateLocalStorage(storedListItemUpdate, listItemsStorage);
-			location.reload();
-		});
-	}
+      const storedListItemUpdate = storedListItems.filter(
+        (itm) => itm.parentId !== item.parentNode.id,
+			); /* eslint-disable-line */
+
+      updateLocalStorage(storedItems, listStorage);
+      updateLocalStorage(storedListItemUpdate, listItemsStorage);
+      window.location.reload();
+    });
+  }
+
+  closeBtns.forEach((item, index) => {
+    listenClose(item, index);
+  });
 }
 
 export default closeBtn;
