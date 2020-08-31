@@ -1,6 +1,6 @@
 # NOT TODO!
 
-# Project: Restaurant Page
+# Project: Not To Do
 In this project, we build a simple NOT TODO list application for keeping track of all the things you are tying to avoid. Its intended to help you keep track of your bad habbit, inevitably helping you make better decisions and grately improve your life in the process. It is built purely with Javascript, HTML and CSS. 
 
 <!--
