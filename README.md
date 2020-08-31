@@ -66,7 +66,7 @@ This project's purpose is to practice Javascript. Its built with ES6 while keepi
 <br>
 
 <!-- ABOUT THE PROJECT -->
-<!-- ## Installation
+- ## Local Usage
 
 To use this app locally, this is what you need to:
 
@@ -79,7 +79,10 @@ To use this app locally, this is what you need to:
   ```
     https://github.com/PhillipUg/not-todo-list.git
   ```
-* `cd` into the downloaded folder and run `npm install` -->
+* `cd` into the downloaded folder and run `npm install`
+
+* then run `npm run start`
+
 
 ### Built With
 This project was built using these technologies.
